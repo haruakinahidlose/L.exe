@@ -5,43 +5,63 @@
 <title>Loading...</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-  html,body{
-    margin:0;
-    background:#000;
-    height:100%;
-    overflow:hidden;
-    cursor:none;
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    height: 100%;
+    overflow: hidden;
   }
-  #img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:none;
+
+  /* Fullscreen container */
+  #screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The prank image */
+  #img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills the screen */
+    display: none;
+  }
+
+  /* Hide cursor for effect */
+  body {
+    cursor: none;
   }
 </style>
 </head>
 <body>
 
 <audio id="s" src="lol.mp3"></audio>
-<img id="img" src="lol.png">
+
+<div id="screen">
+  <img id="img" src="lol.png">
+</div>
 
 <script>
-  // Play startup sound immediately
   const s = document.getElementById("s");
   const img = document.getElementById("img");
 
-  // Try autoplay (mobile may require tap)
+  // Try autoplay
   s.play().catch(()=>{});
 
-  // On any tap/click → show prank screen
-  document.addEventListener("click",()=>{
+  // On any click/tap → show fullscreen prank image
+  document.addEventListener("click", () => {
     s.play();
-    img.style.display="block";
+    img.style.display = "block";
   });
 
-  // Disable right-click (prank effect only)
+  // Disable right-click
   document.addEventListener("contextmenu", e => e.preventDefault());
 </script>
 
